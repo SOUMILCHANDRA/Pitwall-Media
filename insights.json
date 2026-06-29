@@ -1,0 +1,77 @@
+[
+  {
+    "type": "lap_anomaly",
+    "drivers_involved": [
+      "ALB"
+    ],
+    "lap_range": [
+      1.0
+    ],
+    "data_points": {
+      "lap_time": 94.507,
+      "median": 86.438,
+      "diff": 8.069000000000003
+    },
+    "narrative_hint": "ALB had an unusually slow lap on lap 1.0, losing 8.1s compared to their average in that stint."
+  },
+  {
+    "type": "lap_anomaly",
+    "drivers_involved": [
+      "ALB"
+    ],
+    "lap_range": [
+      43.0
+    ],
+    "data_points": {
+      "lap_time": 86.038,
+      "median": 83.638,
+      "diff": 2.3999999999999915
+    },
+    "narrative_hint": "ALB had an unusually slow lap on lap 43.0, losing 2.4s compared to their average in that stint."
+  },
+  {
+    "type": "lap_anomaly",
+    "drivers_involved": [
+      "ANT"
+    ],
+    "lap_range": [
+      1.0
+    ],
+    "data_points": {
+      "lap_time": 86.497,
+      "median": 83.46350000000001,
+      "diff": 3.0334999999999894
+    },
+    "narrative_hint": "ANT had an unusually slow lap on lap 1.0, losing 3.0s compared to their average in that stint."
+  },
+  {
+    "type": "lap_anomaly",
+    "drivers_involved": [
+      "ANT"
+    ],
+    "lap_range": [
+      41.0
+    ],
+    "data_points": {
+      "lap_time": 106.236,
+      "median": 81.75200000000001,
+      "diff": 24.483999999999995
+    },
+    "narrative_hint": "ANT had an unusually slow lap on lap 41.0, losing 24.5s compared to their average in that stint."
+  },
+  {
+    "type": "lap_anomaly",
+    "drivers_involved": [
+      "BEA"
+    ],
+    "lap_range": [
+      1.0
+    ],
+    "data_points": {
+      "lap_time": 93.669,
+      "median": 86.22399999999999,
+      "diff": 7.445000000000007
+    },
+    "narrative_hint": "BEA had an unusually slow lap on lap 1.0, losing 7.4s compared to their average in that stint."
+  }
+]

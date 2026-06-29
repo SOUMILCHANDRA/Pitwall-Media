@@ -1,0 +1,92 @@
+[
+  {
+    "type": "lap_anomaly",
+    "drivers_involved": [
+      "ALB"
+    ],
+    "lap_range": [
+      1.0
+    ],
+    "data_points": {
+      "lap_time": 94.507,
+      "median": 86.438,
+      "diff": 8.069000000000003
+    },
+    "narrative_hint": "ALB had an unusually slow lap on lap 1.0, losing 8.1s compared to their average in that stint.",
+    "headline": "Albon's Lap 1 Struggle",
+    "caption": "Alex Albon's opening lap was unusually slow at 94.507s, losing 8.1 seconds compared to his median stint pace of 86.438s.",
+    "stat_callout": "+8.1s"
+  },
+  {
+    "type": "lap_anomaly",
+    "drivers_involved": [
+      "ALB"
+    ],
+    "lap_range": [
+      43.0
+    ],
+    "data_points": {
+      "lap_time": 86.038,
+      "median": 83.638,
+      "diff": 2.3999999999999915
+    },
+    "narrative_hint": "ALB had an unusually slow lap on lap 43.0, losing 2.4s compared to their average in that stint.",
+    "headline": "ALB's Lap 43 Slowdown",
+    "caption": "Alexander Albon's lap 43 clocked in at 86.038s, a significant 2.4s slower than his median lap time of 83.638s for that stint. This unusual slowdown impacted his race pace.",
+    "stat_callout": "+2.4s"
+  },
+  {
+    "type": "lap_anomaly",
+    "drivers_involved": [
+      "ANT"
+    ],
+    "lap_range": [
+      1.0
+    ],
+    "data_points": {
+      "lap_time": 86.497,
+      "median": 83.46350000000001,
+      "diff": 3.0334999999999894
+    },
+    "narrative_hint": "ANT had an unusually slow lap on lap 1.0, losing 3.0s compared to their average in that stint.",
+    "headline": "ANT's Lap 1 Struggle",
+    "caption": "ANT recorded an unusually slow lap 1.0 at 86.497s, losing 3.033s compared to their median stint pace of 83.464s.",
+    "stat_callout": "-3.0s"
+  },
+  {
+    "type": "lap_anomaly",
+    "drivers_involved": [
+      "ANT"
+    ],
+    "lap_range": [
+      41.0
+    ],
+    "data_points": {
+      "lap_time": 106.236,
+      "median": 81.75200000000001,
+      "diff": 24.483999999999995
+    },
+    "narrative_hint": "ANT had an unusually slow lap on lap 41.0, losing 24.5s compared to their average in that stint.",
+    "headline": "ANT's Lap 41 Struggle",
+    "caption": "ANT recorded an unusually slow lap 41, clocking 106.236s. This was 24.5s slower than their median lap time of 81.752s in that stint.",
+    "stat_callout": "-24.5s"
+  },
+  {
+    "type": "lap_anomaly",
+    "drivers_involved": [
+      "BEA"
+    ],
+    "lap_range": [
+      1.0
+    ],
+    "data_points": {
+      "lap_time": 93.669,
+      "median": 86.22399999999999,
+      "diff": 7.445000000000007
+    },
+    "narrative_hint": "BEA had an unusually slow lap on lap 1.0, losing 7.4s compared to their average in that stint.",
+    "headline": "BEA's Lap 1 Struggle",
+    "caption": "BEA's opening lap clocked in at 93.669s, a significant 7.445s slower than their median stint time of 86.224s.",
+    "stat_callout": "-7.4s"
+  }
+]
