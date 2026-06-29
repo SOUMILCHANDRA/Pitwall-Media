@@ -1,0 +1,7 @@
+fastf1
+pandas
+playwright
+google-genai
+anthropic
+jinja2
+customtkinter
