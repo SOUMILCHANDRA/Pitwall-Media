@@ -45,6 +45,11 @@
             color: #8e8e93;
             font-weight: 700;
         }
+        #brand-logo {
+            max-height: 45px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.05));
+        }
         #driver-logo {
             max-height: 55px;
             max-width: 250px;
@@ -110,6 +115,7 @@
 </head>
 <body>
     <div class="header-container">
+        <img id="brand-logo" src="" alt="" style="display: none;" />
         <div class="session-tag" id="session-tag">TELEMETRY ANALYSIS</div>
         <img id="driver-logo" src="" alt="" style="display: none;" />
     </div>
@@ -152,6 +158,15 @@
                 logoEl.style.display = 'block';
             } else {
                 logoEl.style.display = 'none';
+            }
+
+            // Handle brand logo asset presence safely
+            const brandLogoEl = document.getElementById('brand-logo');
+            if (data.brand_logo_path) {
+                brandLogoEl.src = data.brand_logo_path;
+                brandLogoEl.style.display = 'block';
+            } else {
+                brandLogoEl.style.display = 'none';
             }
         }
 

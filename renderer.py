@@ -103,3 +103,27 @@ if __name__ == '__main__':
     args = parser.parse_args()
     
     render_insights(args.input, args.output)
+
+def render_graphic(payload, template_name, target_path):
+    template_path = f"file:///{os.path.abspath('templates/' + template_name).replace(chr(92), '/')}"
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page(viewport={'width': 1080, 'height': 1080})
+        
+        data = {
+            'headline': payload.get('headline', ''),
+            'stat_callout': payload.get('stat_callout', ''),
+            'caption': payload.get('caption', ''),
+            'team_color': payload.get('color', ''),
+            'logo_path': payload.get('logo_path', ''),
+            'brand_logo_path': payload.get('brand_logo_path', ''),
+            'session_text': payload.get('session_text', '')
+        }
+        
+        page.goto(template_path)
+        page.evaluate(f"window.setData({json.dumps(data)})")
+        page.wait_for_timeout(500)
+        
+        page.screenshot(path=target_path)
+        browser.close()
+

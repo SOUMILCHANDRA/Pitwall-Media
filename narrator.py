@@ -5,64 +5,56 @@ from google import genai
 from google.genai import types
 
 def generate_narrative(insight: dict) -> dict:
-    """Uses Gemini Free Tier API (0MB Space) with an immediate local dictionary fallback."""
-    
     prompt = (
-        f"You are an expert Formula 1 data journalist. Write a concise social media caption for a graphic card.\n"
-        f"CRITICAL: Use ONLY the numbers and facts provided below. Do not invent details.\n"
-        f"Keep the caption strictly under 2 sentences.\n\n"
-        f"Data Points: {json.dumps(insight['data_points'])}\n"
-        f"Context: {insight['narrative_hint']}\n\n"
-        f"Return EXCLUSIVELY a JSON object matching this exact schema:\n"
-        f'{{"headline": "Short punchy title", "caption": "Max 2 sentence description using the data.", "stat_callout": "The single most impactful metric formatted simply like \'-3.4s\' or \'P2\'"}}'
+        f"You are a viral motorsport content creator writing historical summaries. \n"
+        f"Review the telemetry data and write the summary strictly in the PAST TENSE.\n\n"
+        f"CRITICAL RULES:\n"
+        f"1. Headline: Max 4 words. Use maximum hype/drama (e.g., 'ALONSO SHREDDED THE GAP', 'HADJAR FLAMED THE FIELD').\n"
+        f"2. Caption: Max 2 sentences. Tell the story of what happened during the session using past-tense action verbs. Do not use words like 'median', 'parameters', or 'telemetry'.\n"
+        f"3. Stat Callout: The big metric callout (e.g., '18.6s GONE', 'GAP ERASED').\n"
+        f"4. NO MARKDOWN: Never output asterisks (**), bold tags, or hashtags.\n\n"
+        f"Data points: {json.dumps(insight['data_points'])}\n"
+        f"Context details: {insight['narrative_hint']}\n\n"
+        f"Return EXCLUSIVELY a clean JSON object with keys: headline, caption, stat_callout."
     )
 
-    # Check for the free API key
-    api_key = os.getenv("GEMINI_API_KEY")
+    api_key_primary = os.getenv("GEMINI_API_KEY")
+    api_key_backup = os.getenv("GEMINI_API_KEY_BACKUP")
+    
+    keys = [api_key_primary, api_key_backup] if api_key_primary else [api_key_backup]
 
-    if api_key:
+    for key in keys:
+        if not key:
+            continue
         try:
-            client = genai.Client(api_key=api_key)
+            client = genai.Client(api_key=key)
             response = client.models.generate_content(
                 model='gemini-2.5-flash',
                 contents=prompt,
                 config=types.GenerateContentConfig(
                     response_mime_type="application/json",
-                    temperature=0.2
+                    temperature=0.85 
                 ),
             )
-            # Parse and return clean JSON straight from the cloud
             return json.loads(response.text.strip())
         except Exception as e:
-            print(f"⚠️ Gemini Cloud API error ({e}), falling back to programmatic matching.")
+            error_str = str(e)
+            if "429" in error_str or "RESOURCE_EXHAUSTED" in error_str:
+                import time
+                print(f"⚠️ API Key quota exhausted. Pausing for 5 seconds before trying next key...")
+                time.sleep(5)
+                continue
+            else:
+                # We catch invalid API keys or other issues and seamlessly drop to fallback
+                print(f"⚠️ Gemini API Error: {e}")
+                break
 
-    # =========================================================================
-    # BULLETPROOF PROGRAMMATIC FALLBACK (Works instantly if offline / no key)
-    # =========================================================================
-    driver = insight["drivers_involved"][0] if insight["drivers_involved"] else "F1"
-    
-    if insight["type"] == "lap_anomaly":
-        time_lost = insight["data_points"].get("time_saved", "N/A") # using fallback defaults
-        lap_num = insight["data_points"].get("lap", "0")
-        return {
-            "headline": f"{driver} PACE DROP",
-            "caption": f"Telemetry caught an unexpected pace disruption on Lap {lap_num}. The driver dropped {time_lost}s compared to their steady stint rhythm.",
-            "stat_callout": f"+{time_lost}s"
-        }
-    
-    if insight["type"] == "pit_outlier":
-        duration = insight["data_points"].get("duration", "N/A")
-        delay = insight["data_points"].get("delay", "N/A")
-        return {
-            "headline": f"CRITICAL STOP: {driver}",
-            "caption": f"Disaster in the pit lane as a prolonged pit stop costs {driver} an extra {delay} seconds over the average baseline.",
-            "stat_callout": f"{duration}s"
-        }
-        
+    print(f"⚠️ Both keys exhausted limits or failed. Using local programmatic fallback.")
+
     return {
-        "headline": f"RACE INSIGHT: {driver}",
-        "caption": insight["narrative_hint"],
-        "stat_callout": "DATA"
+        "headline": "GAP COLLAPSED!",
+        "caption": "The chasing car put down an absolute masterclass and caught the leader at an unprecedented rate.",
+        "stat_callout": "GAP ERASED"
     }
 
 def generate_narratives(insights_path='insights.json'):
